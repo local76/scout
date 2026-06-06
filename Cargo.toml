@@ -1,0 +1,24 @@
+[package]
+name = "rwif"
+version = "2.5.0"
+edition = "2024"
+
+[dependencies]
+ratatui = "0.29"
+crossterm = "0.28"
+winreg = "0.56.0"
+sysinfo = "0.30"
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_NetworkManagement_WiFi",
+    "Win32_NetworkManagement_Ndis",
+    "Win32_System_EventLog",
+    "Win32_System_Console",
+    "Win32_System_Power",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_HiDpi",
+] }
+qrcodegen = "1.8.0"
+
+[build-dependencies]
+winres = "0.1"
