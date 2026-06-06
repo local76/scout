@@ -385,6 +385,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "rcommon"
+version = "0.1.0"
+dependencies = [
+ "crossterm",
+ "ratatui",
+ "sysinfo",
+ "windows",
+ "windows-sys 0.59.0",
+ "winreg",
+]
+
+[[package]]
 name = "redox_syscall"
 version = "0.5.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -414,12 +426,14 @@ checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
 
 [[package]]
 name = "rwif"
-version = "2.5.0"
+version = "2.5.3"
 dependencies = [
  "crossterm",
  "qrcodegen",
  "ratatui",
+ "rcommon",
  "sysinfo",
+ "windows",
  "windows-sys 0.59.0",
  "winreg",
  "winres",

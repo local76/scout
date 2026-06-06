@@ -20,9 +20,15 @@ use ratatui::{
 mod config;
 mod input;
 mod logger;
-mod reg;
-mod widgets;
-mod win32;
+mod wlan;
+
+mod win32 {
+    pub use rcommon::win32::*;
+    pub use crate::wlan::*;
+}
+mod widgets {
+    pub use rcommon::widgets::*;
+}
 
 use input::TextBox;
 use logger::log_message;
@@ -320,7 +326,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     enable_raw_mode()?;
     let mut stdout = io::stdout();
-    let _ = execute!(stdout, ratatui::crossterm::terminal::SetSize(110, 38));
+    let _ = execute!(stdout, ratatui::crossterm::terminal::SetSize(100, 35));
     execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
     
     let _borderless = if config.enable_borderless {
