@@ -3,4 +3,4 @@
 cd "$(dirname "$0")"
 
 echo "Generating shell completion scripts..."
-# Typically: ../../target/release/rwif --generate-completions <shell>
+# Typically: ../../target/release/rwifi --generate-completions <shell>

@@ -17,13 +17,13 @@ if [ -z "$VERSION" ]; then
 fi
 
 # Prepare spec file with version substituted
-sed "s/TEMPLATE_VERSION/$VERSION/g" rwif.spec > rpmbuild/SPECS/rwif.spec
+sed "s/TEMPLATE_VERSION/$VERSION/g" rwifi.spec > rpmbuild/SPECS/rwifi.spec
 
 # Create source tarball
-tar --exclude='rpmbuild' --exclude='target' --exclude='.git' -czf rpmbuild/SOURCES/rwif-$VERSION.tar.gz -C ../.. .
+tar --exclude='rpmbuild' --exclude='target' --exclude='.git' -czf rpmbuild/SOURCES/rwifi-$VERSION.tar.gz -C ../.. .
 
 # Run rpmbuild locally
-rpmbuild -ba rpmbuild/SPECS/rwif.spec --define "_topdir $(pwd)/rpmbuild"
+rpmbuild -ba rpmbuild/SPECS/rwifi.spec --define "_topdir $(pwd)/rpmbuild"
 
 # Copy output to dist/packages
-cp rpmbuild/RPMS/*/*.rpm ../../dist/packages/rwif.rpm
+cp rpmbuild/RPMS/*/*.rpm ../../dist/packages/rwifi.rpm

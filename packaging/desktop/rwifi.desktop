@@ -2,7 +2,7 @@
 Type=Application
 Name=rWifi
 Comment=A project template for creating unified local terminal utilities in Rust
-Exec=rwif
-Icon=rwif
+Exec=rwifi
+Icon=rwifi
 Terminal=true
 Categories=Utility;System;

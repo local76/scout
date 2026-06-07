@@ -315,7 +315,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     logger::set_event_log_enabled(config.enable_event_log);
 
-    logger::log_message("INFO", "rwif application starting up...");
+    logger::log_message("INFO", "rwifi application starting up...");
     
     let _instance_guard = match SingleInstanceGuard::try_new() {
         Ok(g) => g,

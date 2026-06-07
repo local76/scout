@@ -15,10 +15,10 @@ jobs:
         run: |
           echo "Simulated Flatpak builder using manifest"
           mkdir -p dist/packages
-          echo "dummy" > dist/packages/rwif.flatpak
+          echo "dummy" > dist/packages/rwifi.flatpak
       - name: Upload Flatpak to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/packages/rwif.flatpak
+          files: dist/packages/rwifi.flatpak
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -15,10 +15,10 @@ jobs:
         run: |
           echo "Simulated AppImage compilation using appimage-builder"
           mkdir -p dist/packages
-          echo "dummy" > dist/packages/rwif.appimage
+          echo "dummy" > dist/packages/rwifi.appimage
       - name: Upload AppImage to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/packages/rwif.appimage
+          files: dist/packages/rwifi.appimage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

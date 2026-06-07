@@ -2,7 +2,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
     <Product
         Id='*'
-        Name='rwif'
+        Name='rwifi'
         UpgradeCode='BF2F23A4-1065-4A3C-9A52-AE5A52DDEBD2'
         Language='1033'
         Codepage='1252'
@@ -25,13 +25,13 @@
 
         <Directory Id='TARGETDIR' Name='SourceDir'>
             <Directory Id='ProgramFiles64Folder' Name='PFiles'>
-                <Directory Id='APPLICATIONFOLDER' Name='rwif'>
-                    <Component Id='rwif_bin' Guid='BF2F23A4-1065-4A3C-9A52-AE5A52DDEBD3' Win64='yes'>
+                <Directory Id='APPLICATIONFOLDER' Name='rwifi'>
+                    <Component Id='rwifi_bin' Guid='BF2F23A4-1065-4A3C-9A52-AE5A52DDEBD3' Win64='yes'>
                         <File
-                            Id='rwif_exe'
-                            Name='rwif.exe'
+                            Id='rwifi_exe'
+                            Name='rwifi.exe'
                             DiskId='1'
-                            Source='$(var.CargoTargetBinDir)\rwif.exe'
+                            Source='$(var.CargoTargetBinDir)\rwifi.exe'
                             KeyPath='yes'/>
                     </Component>
                 </Directory>
@@ -39,7 +39,7 @@
         </Directory>
 
         <Feature Id='MainProgram' Title='rWifi Application' Level='1'>
-            <ComponentRef Id='rwif_bin'/>
+            <ComponentRef Id='rwifi_bin'/>
         </Feature>
     </Product>
 </Wix>

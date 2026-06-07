@@ -9,5 +9,5 @@ All notable changes to this project will be documented in this file.
 ## [3.0.0] - 2026-06-06
 ### Changed
 - Renamed organization to `local76`.
-- Renamed executable from `rtem` to `rwif`.
+- Renamed executable from `rtem` to `rwifi`.
 - Reorganized directory structure to group packaging files inside `dist/packages/`.

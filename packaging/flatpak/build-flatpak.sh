@@ -3,4 +3,4 @@
 cd "$(dirname "$0")"
 
 echo "Building Flatpak package..."
-flatpak-builder --force-clean build-dir org.local76.rwif.yaml
+flatpak-builder --force-clean build-dir org.local76.rwifi.yaml

@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
-echo "rwif installed successfully."
+echo "rwifi installed successfully."
 exit 0

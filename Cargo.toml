@@ -1,5 +1,5 @@
 [package]
-name = "rwif"
+name = "rwifi"
 version = "2.5.3"
 edition = "2024"
 
@@ -33,15 +33,15 @@ winres = "0.1"
 [package.metadata.deb]
 maintainer = "Jeryd <jerydleuck@gmail.com>"
 assets = [
-    ["target/x86_64-unknown-linux-musl/release/rwif", "usr/bin/rwif", "755"],
-    ["assets/brand/app_icon.png", "usr/share/pixmaps/rwif.png", "644"],
-    ["packaging/desktop/rwif.desktop", "usr/share/applications/rwif.desktop", "644"],
+    ["target/x86_64-unknown-linux-musl/release/rwifi", "usr/bin/rwifi", "755"],
+    ["assets/brand/app_icon.png", "usr/share/pixmaps/rwifi.png", "644"],
+    ["packaging/desktop/rwifi.desktop", "usr/share/applications/rwifi.desktop", "644"],
 ]
 
 [package.metadata.generate-rpm]
 auto-req = "no"
 assets = [
-    { source = "target/x86_64-unknown-linux-musl/release/rwif", dest = "/usr/bin/rwif", mode = "755" }
+    { source = "target/x86_64-unknown-linux-musl/release/rwifi", dest = "/usr/bin/rwifi", mode = "755" }
 ]
 
 # To build locally before pushing rCommon to GitHub, uncomment:

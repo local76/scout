@@ -52,21 +52,21 @@
 
 │   ├── binaries/                                     # Folder for raw, un-packaged compiled executables
 
-│   │   ├── rwif                                 # Compiled raw binary for Linux
+│   │   ├── rwifi                                 # Compiled raw binary for Linux
 
-│   │   └── rwif.exe                             # Compiled raw binary for Windows
+│   │   └── rwifi.exe                             # Compiled raw binary for Windows
 
 │   └── packages/                                     # Folder for final bundled distribution formats
 
-│       ├── rwif.apk                             # Compiled Alpine Linux package
+│       ├── rwifi.apk                             # Compiled Alpine Linux package
 
-│       ├── rwif.appimage                        # Compiled universal Linux portable executable
+│       ├── rwifi.appimage                        # Compiled universal Linux portable executable
 
-│       ├── rwif.deb                             # Compiled Debian/Ubuntu installation package
+│       ├── rwifi.deb                             # Compiled Debian/Ubuntu installation package
 
-│       ├── rwif.msi                             # Compiled Windows installer package
+│       ├── rwifi.msi                             # Compiled Windows installer package
 
-│       └── rwif.rpm                             # Compiled RedHat/Fedora installation package
+│       └── rwifi.rpm                             # Compiled RedHat/Fedora installation package
 
 ├── docs/                                             # Deep-dive documentation for users/contributors
 
@@ -98,15 +98,15 @@
 
 │   │   ├── generate-completions.sh                   # Script to auto-generate below files via Rust 'clap'
 
-│   │   ├── rwif.bash                            # Auto-completion logic for Bash shell
+│   │   ├── rwifi.bash                            # Auto-completion logic for Bash shell
 
-│   │   ├── rwif.fish                            # Auto-completion logic for Fish shell
+│   │   ├── rwifi.fish                            # Auto-completion logic for Fish shell
 
-│   │   ├── rwif.nu                              # Auto-completion logic for Nushell
+│   │   ├── rwifi.nu                              # Auto-completion logic for Nushell
 
-│   │   ├── rwif.ps1                             # Auto-completion logic for PowerShell
+│   │   ├── rwifi.ps1                             # Auto-completion logic for PowerShell
 
-│   │   └── rwif.zsh                             # Auto-completion logic for Zsh shell
+│   │   └── rwifi.zsh                             # Auto-completion logic for Zsh shell
 
 │   ├── deb/                                          # Debian/Ubuntu package environment
 
@@ -122,15 +122,15 @@
 
 │   ├── desktop/                                      # Standard Linux desktop integration files
 
-│   │   ├── rwif.1                               # Linux man page documentation for terminal users
+│   │   ├── rwifi.1                               # Linux man page documentation for terminal users
 
-│   │   └── rwif.desktop                         # Linux application launcher shortcut and metadata
+│   │   └── rwifi.desktop                         # Linux application launcher shortcut and metadata
 
 │   ├── flatpak/                                      # Flatpak sandboxed application environment
 
 │   │   ├── build-flatpak.sh                          # Isolated script to execute 'flatpak-builder'
 
-│   │   └── org.local76.rwif.yaml                # Flatpak manifest defining dependencies
+│   │   └── org.local76.rwifi.yaml                # Flatpak manifest defining dependencies
 
 │   ├── nix/                                          # NixOS / Nix package manager environment
 
@@ -142,7 +142,7 @@
 
 │   │   ├── build-redhat-rpm.sh                       # Isolated script to set up rpmbuild tree and execute
 
-│   │   └── rwif.spec                            # RPM specification file (Name, Version, %prep, %build)
+│   │   └── rwifi.spec                            # RPM specification file (Name, Version, %prep, %build)
 
 │   ├── winget/                                       # Windows Package Manager environment
 

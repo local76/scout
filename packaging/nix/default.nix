@@ -1,7 +1,7 @@
 { lib, rustPlatform }:
 
 rustPlatform.buildRustPackage rec {
-  pname = "rwif";
+  pname = "rwifi";
   version = "TEMPLATE_VERSION";
 
   src = ../..;

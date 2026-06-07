@@ -2,11 +2,11 @@ version: 1
 AppDir:
   path: ./AppDir
   app_info:
-    id: org.local76.rwif
-    name: rwif
-    icon: rwif
+    id: org.local76.rwifi
+    name: rwifi
+    icon: rwifi
     version: TEMPLATE_VERSION
-    exec: usr/bin/rwif
+    exec: usr/bin/rwifi
   apt:
     arch: amd64
     sources:

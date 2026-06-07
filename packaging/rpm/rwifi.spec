@@ -1,4 +1,4 @@
-Name:           rwif
+Name:           rwifi
 Version:        TEMPLATE_VERSION
 Release:        1%{?dist}
 Summary:        A project template for creating unified local terminal utilities in Rust
@@ -18,7 +18,7 @@ cargo build --release --locked
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/%{_bindir}
-install -m 755 target/release/rwif $RPM_BUILD_ROOT/%{_bindir}/rwif
+install -m 755 target/release/rwifi $RPM_BUILD_ROOT/%{_bindir}/rwifi
 
 %files
-%{_bindir}/rwif
+%{_bindir}/rwifi

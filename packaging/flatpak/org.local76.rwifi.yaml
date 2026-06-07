@@ -1,11 +1,11 @@
-app-id: org.local76.rwif
+app-id: org.local76.rwifi
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
-command: rwif
+command: rwifi
 modules:
-  - name: rwif
+  - name: rwifi
     buildsystem: simple
     build-commands:
       - cargo build --release --locked
-      - install -Dm755 target/release/rwif /app/bin/rwif
+      - install -Dm755 target/release/rwifi /app/bin/rwifi

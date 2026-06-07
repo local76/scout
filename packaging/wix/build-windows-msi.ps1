@@ -11,11 +11,11 @@ cargo wix --wxs packaging/wix/main.wxs
 # Ensure dist/packages exists
 New-Item -ItemType Directory -Force -Path "dist/packages" | Out-Null
 
-# Copy build result to dist/packages/rwif.msi
+# Copy build result to dist/packages/rwifi.msi
 $msiPath = Get-ChildItem -Path "target/wix/*.msi" | Select-Object -First 1
 if ($msiPath) {
-    Copy-Item $msiPath.FullName -Destination "dist/packages/rwif.msi" -Force
-    Write-Host "MSI copied successfully to dist/packages/rwif.msi"
+    Copy-Item $msiPath.FullName -Destination "dist/packages/rwifi.msi" -Force
+    Write-Host "MSI copied successfully to dist/packages/rwifi.msi"
 } else {
     Write-Error "Error: No MSI installer found in target/wix/"
 }
