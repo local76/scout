@@ -22,6 +22,9 @@
 
         <Media Id='1' Cabinet='media1.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1'/>
         <Property Id='DiskPrompt' Value='rWifi Installation [1]'/>
+        <Property Id='ARPPRODUCTICON' Value='ProductIcon'/>
+
+        <Icon Id='ProductIcon' SourceFile='assets\brand\app.ico'/>
 
         <Directory Id='TARGETDIR' Name='SourceDir'>
             <Directory Id='ProgramFiles64Folder' Name='PFiles'>
@@ -32,9 +35,21 @@
                             Name='rwifi.exe'
                             DiskId='1'
                             Source='$(var.CargoTargetBinDir)\rwifi.exe'
-                            KeyPath='yes'/>
+                            KeyPath='yes'>
+                            <Shortcut
+                                Id='ApplicationStartMenuShortcut'
+                                Directory='ProgramMenuProductFolder'
+                                Name='rWifi'
+                                Description='rWifi Wireless Network Manager'
+                                WorkingDirectory='APPLICATIONFOLDER'
+                                Icon='ProductIcon'
+                                Advertise='yes'/>
+                        </File>
                     </Component>
                 </Directory>
+            </Directory>
+            <Directory Id='ProgramMenuFolder' Name='Programs'>
+                <Directory Id='ProgramMenuProductFolder' Name='rWifi'/>
             </Directory>
         </Directory>
 

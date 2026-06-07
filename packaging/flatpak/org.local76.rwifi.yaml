@@ -9,3 +9,5 @@ modules:
     build-commands:
       - cargo build --release --locked
       - install -Dm755 target/release/rwifi /app/bin/rwifi
+      - install -Dm644 packaging/desktop/rwifi.desktop /app/share/applications/org.local76.rwifi.desktop
+      - install -Dm644 assets/brand/app_icon.png /app/share/icons/hicolor/256x256/apps/org.local76.rwifi.png
