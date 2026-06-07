@@ -354,7 +354,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
 
-    let _title_guard = ConsoleTitleGuard::new("rWif");
+    let _title_guard = ConsoleTitleGuard::new("rWifi");
 
     enable_raw_mode()?;
     let mut stdout = io::stdout();
