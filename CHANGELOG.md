@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2026.06.09] - 2026-06-09
+## [2026.6.9] - 2026-06-09
 
 ### Renamed
 - **Project rename**: `scout` was previously `scout-tui` / `rWifi`. The Cargo package name, binary name, file paths, registry keys, and docs are now lowercase `scout`. Behavior and features are unchanged.
