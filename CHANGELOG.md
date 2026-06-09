@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.3] - 2026-06-09
+
+### Renamed
+- **Project rename**: `scout` was previously `scout-tui` / `rWifi`. The Cargo package name, binary name, file paths, registry keys, and docs are now lowercase `scout`. Behavior and features are unchanged.
+
+### Changed
+- README rewritten in the new register: WiFi scanner feature list, install matrix, CLI flags, configuration, build instructions, license.
+- Drop the legacy "r*" and "Local freedom" branding throughout.
+- Drop the per-repo `rApps` umbrella and `build_all.ps1` from this repo; build orchestration lives in [`toolkit`](https://github.com/local76/toolkit).
+
 ## [3.1.0] - 2026-06-08
 
 ### Changed
