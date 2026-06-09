@@ -8,7 +8,7 @@ ratatui = "0.29"
 crossterm = "0.28"
 sysinfo = "0.30"
 qrcodegen = "1.8.0"
-rcommon = { git = "https://github.com/local76/rCommon.git", branch = "main", features = ["widgets", "sys-info", "window", "clipboard", "notification", "event-log"] }
+rcommon = { git = "https://github.com/local76/rCommon.git", branch = "main", features = ["widgets", "sys-info", "window", "clipboard", "notification", "event-log", "scenes"] }
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.56.0"
