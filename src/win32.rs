@@ -3,14 +3,14 @@
 //!
 //! **Taxonomy Classification**: Platform (Win32 Console Integration).
 
-pub use rcommon::clipboard::copy_text_to_clipboard;
-pub use rcommon::event_log::log_system_event as log_windows_event;
-pub use rcommon::notification::show_toast_notification;
-pub use rcommon::sys_info::{
+pub use library::clipboard::copy_text_to_clipboard;
+pub use library::event_log::log_system_event as log_windows_event;
+pub use library::notification::show_toast_notification;
+pub use library::sys_info::{
     query_dark_mode, query_os_version, query_power_status,
     get_dwm_accent_color, GlyphMap,
 };
-pub use rcommon::window::{
+pub use library::window::{
     center_console_window, query_cursor_pos, get_window_rect, set_window_pos,
     BorderlessConsole, ConsoleTitleGuard, SingleInstanceGuard, relaunch_in_conhost_if_needed,
 };

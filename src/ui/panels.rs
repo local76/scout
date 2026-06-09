@@ -256,7 +256,7 @@ pub fn draw_info_panel(f: &mut Frame, app: &mut AppState, theme: &ThemeColors, a
             height: 1,
         };
         let use_unicode = app.glyphs.status_ok == "✔️";
-        let gauge = rcommon::widgets::AccentGauge::new(
+        let gauge = library::widgets::AccentGauge::new(
             net.signal_quality as f64 / 100.0,
             "",
             theme.accent,

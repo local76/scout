@@ -1,5 +1,5 @@
-﻿[package]
-name = "rwifi"
+[package]
+name = "scout"
 version = "3.1.2"
 edition = "2024"
 
@@ -8,7 +8,7 @@ ratatui = "0.29"
 crossterm = "0.28"
 sysinfo = "0.30"
 qrcodegen = "1.8.0"
-rcommon = { git = "https://github.com/local76/rCommon.git", branch = "main", features = ["widgets", "sys-info", "window", "clipboard", "notification", "event-log", "scenes"] }
+library = { git = "https://github.com/local76/library.git", branch = "main", features = ["widgets", "sys-info", "window", "clipboard", "notification", "event-log", "scenes"] }
 
 [target.'cfg(windows)'.dependencies]
 winreg = "0.56.0"
@@ -46,6 +46,6 @@ assets = [
     { source = "packaging/desktop/rwifi.desktop", dest = "/usr/share/applications/rwifi.desktop", mode = "644" }
 ]
 
-[patch."https://github.com/local76/rCommon.git"]
-rcommon = { path = "../rCommon" }
+[patch."https://github.com/local76/library.git"]
+library = { path = "../library" }
 
