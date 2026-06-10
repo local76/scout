@@ -1,6 +1,6 @@
 [package]
 name = "scout"
-version = "2026.6.9"
+version = "2026.6.10"
 edition = "2024"
 
 [dependencies]
