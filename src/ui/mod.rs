@@ -41,7 +41,7 @@ pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
             .block(block)
             .alignment(ratatui::layout::Alignment::Center);
 
-        let area = utils::centered_rect(80, 50, size);
+        let area = layout::centered_rect(80, 50, size);
         f.render_widget(Clear, area);
         f.render_widget(p, area);
         return;
