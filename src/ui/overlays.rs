@@ -12,7 +12,7 @@ use ratatui::{
 };
 use crate::app::AppState;
 use crate::ui::ThemeColors;
-use crate::ui::utils::{centered_rect, centered_rect_fixed, wrap_text};
+use crate::ui::layout::{centered_rect, centered_rect_fixed, wrap_text};
 use crate::win32;
 
 pub fn draw_password_overlay(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {

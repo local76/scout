@@ -5,7 +5,7 @@
 use crossterm::event::KeyCode;
 use crate::app::AppState;
 use crate::ui::{ThemeColors, parse_markdown_to_lines};
-use crate::ui::utils::generate_qr_code_lines;
+use crate::ui::layout::generate_qr_code_lines;
 use crate::win32;
 
 pub fn handle_keypress(app: &mut AppState, code: KeyCode, theme: &ThemeColors) {

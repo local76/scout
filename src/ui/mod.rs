@@ -13,7 +13,7 @@ use crate::app::AppState;
 
 pub mod widgets;
 pub mod overlays;
-pub mod utils;
+pub mod layout;
 
 pub use library::interface::tui::design::prelude::{ThemeColors, get_theme, parse_markdown_to_lines};
 
