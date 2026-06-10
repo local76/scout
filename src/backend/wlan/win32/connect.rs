@@ -4,7 +4,7 @@
 
 use windows_sys::Win32::NetworkManagement::WiFi::*;
 use windows_sys::Win32::Foundation::ERROR_SUCCESS;
-use crate::wlan::WlanNetwork;
+use crate::backend::wlan::WlanNetwork;
 
 /// Helper to escape XML characters for WiFi profiles.
 pub fn escape_xml(input: &str) -> String {

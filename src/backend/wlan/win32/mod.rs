@@ -11,7 +11,7 @@ pub use connect::*;
 #[allow(unused_imports)]
 pub use enterprise::*;
 
-use crate::wlan::{WlanNetwork, RadioState};
+use crate::backend::wlan::{WlanNetwork, RadioState};
 
 pub fn query_wifi_networks(force_scan: bool) -> Result<Vec<WlanNetwork>, u32> {
     use windows_sys::Win32::NetworkManagement::WiFi::*;

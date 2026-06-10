@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 ### Renamed
 - **Project rename**: `scout` was previously `scout-tui` / `rWifi`. The Cargo package name, binary name, file paths, registry keys, and docs are now lowercase `scout`. Behavior and features are unchanged.
 
+### Refactored
+- **TUI Blueprint alignment**: Re-architected directory and module tree to standard TUI layout. Renamed `src/ui/panels.rs` to `src/ui/widgets.rs`. Created `src/backend/` directory, moving the `src/wlan/` files under `src/backend/wlan/`. Renamed the background thread manager `src/worker.rs` to `src/backend/mod.rs` to act as the standard backend manager.
+
 ### Changed
 - README rewritten in the new register: WiFi scanner feature list, install matrix, CLI flags, configuration, build instructions, license.
 - Drop the legacy "r*" and "Local freedom" branding throughout.

@@ -11,101 +11,11 @@ use ratatui::{
 };
 use crate::app::AppState;
 
-pub mod panels;
+pub mod widgets;
 pub mod overlays;
 pub mod utils;
 
-#[derive(Debug, Clone, Copy)]
-pub struct ThemeColors {
-    pub border: Color,
-    pub border_active: Color,
-    pub text_main: Color,
-    pub text_dim: Color,
-    pub accent: Color,
-}
-
-pub fn get_theme(dark: bool, accent_color: Color) -> ThemeColors {
-    if dark {
-        ThemeColors {
-            border: Color::Rgb(68, 68, 84),
-            border_active: accent_color,
-            text_main: Color::Rgb(248, 248, 242),
-            text_dim: Color::Rgb(136, 136, 153),
-            accent: accent_color,
-        }
-    } else {
-        ThemeColors {
-            border: Color::Rgb(180, 180, 190),
-            border_active: accent_color,
-            text_main: Color::Rgb(40, 42, 54),
-            text_dim: Color::Rgb(100, 100, 115),
-            accent: accent_color,
-        }
-    }
-}
-
-pub fn parse_markdown_to_lines(content: &str, theme: &ThemeColors) -> Vec<Line<'static>> {
-    let mut lines = Vec::new();
-    let mut current_paragraph = String::new();
-
-    let flush_paragraph = |para: &mut String, lines: &mut Vec<Line<'static>>| {
-        if !para.is_empty() {
-            lines.push(Line::from(Span::styled(
-                para.clone(),
-                Style::default().fg(theme.text_main),
-            )));
-            para.clear();
-        }
-    };
-
-    for line in content.lines() {
-        let trimmed = line.trim();
-        if trimmed.is_empty() {
-            flush_paragraph(&mut current_paragraph, &mut lines);
-            lines.push(Line::from(""));
-            continue;
-        }
-
-        if trimmed.starts_with("# ") {
-            flush_paragraph(&mut current_paragraph, &mut lines);
-            let header = trimmed[2..].to_string();
-            lines.push(Line::from(""));
-            lines.push(Line::from(Span::styled(
-                format!("=== {} ===", header.to_uppercase()),
-                Style::default()
-                    .fg(theme.accent)
-                    .add_modifier(Modifier::BOLD),
-            )));
-            lines.push(Line::from(""));
-        } else if trimmed.starts_with("## ") {
-            flush_paragraph(&mut current_paragraph, &mut lines);
-            let header = trimmed[3..].to_string();
-            lines.push(Line::from(""));
-            lines.push(Line::from(Span::styled(
-                format!("--- {} ---", header),
-                Style::default()
-                    .fg(theme.accent)
-                    .add_modifier(Modifier::BOLD),
-            )));
-            lines.push(Line::from(""));
-        } else if trimmed.starts_with("* ") || trimmed.starts_with("- ") {
-            flush_paragraph(&mut current_paragraph, &mut lines);
-            let item = trimmed[2..].to_string();
-            lines.push(Line::from(vec![
-                Span::styled(" * ", Style::default().fg(theme.accent)),
-                Span::styled(item, Style::default().fg(theme.text_main)),
-            ]));
-        } else {
-            if !current_paragraph.is_empty() {
-                current_paragraph.push(' ');
-            }
-            current_paragraph.push_str(trimmed);
-        }
-    }
-
-    flush_paragraph(&mut current_paragraph, &mut lines);
-    lines
-}
+pub use library::interface::tui::design::prelude::{ThemeColors, get_theme, parse_markdown_to_lines};
 
 pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
     let size = f.area();
@@ -147,7 +57,7 @@ pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
         .split(size);
 
     // Render static panels
-    panels::draw_header(f, app, theme, chunks[0]);
+    widgets::draw_header(f, app, theme, chunks[0]);
     
     let body_chunks = Layout::default()
         .direction(Direction::Horizontal)
@@ -157,9 +67,9 @@ pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
         ])
         .split(chunks[1]);
 
-    panels::draw_network_list(f, app, theme, body_chunks[0]);
-    panels::draw_info_panel(f, app, theme, body_chunks[1]);
-    panels::draw_footer(f, app, theme, chunks[2]);
+    widgets::draw_network_list(f, app, theme, body_chunks[0]);
+    widgets::draw_info_panel(f, app, theme, body_chunks[1]);
+    widgets::draw_footer(f, app, theme, chunks[2]);
 
     // Render overlay modals in order of precedence
     if app.show_password_overlay {

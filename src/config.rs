@@ -38,6 +38,7 @@ impl AppConfig {
             let appdata = std::env::var("APPDATA").ok()?;
             Some(
                 std::path::PathBuf::from(appdata)
+                    .join("local76")
                     .join("scout")
                     .join("config.yaml"),
             )
@@ -52,7 +53,7 @@ impl AppConfig {
                         .map(|h| PathBuf::from(h).join(".config"))
                 })
                 .unwrap_or_else(|| PathBuf::from(".config"));
-            Some(base.join("scout").join("config.yaml"))
+            Some(base.join("local76").join("scout").join("config.yaml"))
         }
     }
 
@@ -123,6 +124,6 @@ impl AppConfig {
             self.enable_toasts,
             self.enable_event_log,
         );
-        std::fs::write(path, content)
+        library::write_file_atomic(path, content)
     }
 }

@@ -3,32 +3,22 @@
 //!
 //! **Taxonomy Classification**: Application Coordinator.
 
-use std::{
-    io,
-    time::{Duration, Instant},
-};
+use std::time::{Duration, Instant};
 
-use crossterm::{
-    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyEventKind},
-    execute,
-    terminal::{EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode},
-};
-use ratatui::{
-    Terminal,
-    backend::CrosstermBackend,
-};
+use crossterm::event::{self, Event, KeyEventKind};
+use library::lifecycle::foreground::tui_bootstrap::{bootstrap_tui, shutdown_tui, TuiBootstrapConfig};
 
 mod config;
 mod input;
 mod logger;
-mod wlan;
+mod backend;
 mod win32;
 mod app;
 mod ui;
 
 // Re-exports for submodules
 #[cfg(not(windows))]
-pub use crate::wlan::windows_sys;
+pub use crate::backend::wlan::windows_sys;
 
 // Embedded markdown documentation files
 pub const README_CONTENT: &str = include_str!("../README.md");
@@ -49,50 +39,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     logger::set_event_log_enabled(config.enable_event_log);
     logger::log_message("INFO", "scout application starting up...");
     
-    let _instance_guard = match win32::SingleInstanceGuard::try_new() {
-        Ok(g) => g,
-        Err(e) => {
-            eprintln!("Error: {}", e);
-            std::process::exit(1);
-        }
-    };
+    let mut tui_config = TuiBootstrapConfig::new("scout");
+    tui_config.borderless = config.enable_borderless;
+    tui_config.size = (100, 35);
 
-    let _title_guard = win32::ConsoleTitleGuard::new("scout");
-
-    enable_raw_mode()?;
-    let mut stdout = io::stdout();
-    let _ = execute!(stdout, ratatui::crossterm::terminal::SetSize(100, 35));
-    execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
-    
-    let _borderless = if config.enable_borderless {
-        Some(win32::BorderlessConsole::enable())
-    } else {
-        None
-    };
-    std::thread::sleep(Duration::from_millis(50)); // Allow dimensions settle delay
-
-    if _borderless.is_none() {
-        win32::center_console_window();
-    }
+    let (mut terminal, _guards) = bootstrap_tui(tui_config)?;
 
     #[cfg(windows)]
     {
-        // Re-show the console window after TUI init (parity with helm/pulse).
-        unsafe extern "system" {
-            fn ShowWindow(hWnd: *mut std::ffi::c_void, nCmdShow: i32) -> i32;
-            fn SetForegroundWindow(hWnd: *mut std::ffi::c_void) -> i32;
-        }
-        let hwnd = win32::hide_console_at_startup().unwrap_or(std::ptr::null_mut());
-        if !hwnd.is_null() {
-            unsafe {
-                ShowWindow(hwnd, 5); // SW_SHOW
-                SetForegroundWindow(hwnd);
-            }
-        }
+        library::show_console_window();
     }
-
-    let backend = CrosstermBackend::new(stdout);
-    let mut terminal = Terminal::new(backend)?;
 
     let mut app = app::AppState::new();
     
@@ -102,6 +58,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut last_tick = Instant::now();
 
     while !app.should_quit {
+        if library::lifecycle::foreground::tui_bootstrap::is_app_shutting_down() {
+            break;
+        }
         app.check_scan_results();
         app.sync_power_status_if_needed();
 
@@ -139,7 +98,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             match event::read()? {
                 Event::Key(key) => {
                     if key.kind == KeyEventKind::Press {
-                        app::keys::handle_keypress(&mut app, key.code, &theme);
+                        if key.code == crossterm::event::KeyCode::Char('c') && key.modifiers.contains(crossterm::event::KeyModifiers::CONTROL) {
+                            app.should_quit = true;
+                        } else {
+                            app::keys::handle_keypress(&mut app, key.code, &theme);
+                        }
                     }
                 }
                 Event::Mouse(mouse_event) => {
@@ -161,14 +124,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // Restore terminal
-    disable_raw_mode()?;
-    execute!(
-        terminal.backend_mut(),
-        LeaveAlternateScreen,
-        DisableMouseCapture,
-        ratatui::crossterm::cursor::Show
-    )?;
-    terminal.show_cursor()?;
+    shutdown_tui(&mut terminal)?;
 
     Ok(())
 }

@@ -1,9 +1,9 @@
 #![allow(unused)]
-#[path = "../wlan/mod.rs"]
-mod wlan;
+#[path = "../backend/mod.rs"]
+mod backend;
 
 #[cfg(not(windows))]
-use wlan::windows_sys;
+use backend::wlan::windows_sys;
 
 fn main() {
     println!("Testing connect_to_wifi with a fake network to check for crashes...");
@@ -14,7 +14,7 @@ fn main() {
         data4: [0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0],
     };
     
-    let fake_net = wlan::WlanNetwork {
+    let fake_net = backend::wlan::WlanNetwork {
         ssid: "FakeSecureWiFi".to_string(),
         signal_quality: 100,
         is_connected: false,
@@ -26,7 +26,7 @@ fn main() {
     };
 
     println!("Calling connect_to_wifi with password containing special XML characters...");
-    match wlan::connect_to_wifi(&fake_net.ssid, Some("pass<&word"), &fake_net) {
+    match backend::wlan::connect_to_wifi(&fake_net.ssid, Some("pass<&word"), &fake_net) {
         Ok(_) => println!("Result: Ok"),
         Err(e) => {
             println!("Result: Err: {}", e);

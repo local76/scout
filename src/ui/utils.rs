@@ -2,28 +2,10 @@
 //!
 //! **Taxonomy Classification**: UI Rendering (UI Utilities).
 
-use ratatui::layout::{Constraint, Direction, Layout, Rect};
+use ratatui::layout::Rect;
 
-/// Layout helper to get a centered percentage rect.
-pub fn centered_rect(percent_x: u16, percent_y: u16, r: Rect) -> Rect {
-    let popup_layout = Layout::default()
-        .direction(Direction::Vertical)
-        .constraints([
-            Constraint::Percentage((100 - percent_y) / 2),
-            Constraint::Percentage(percent_y),
-            Constraint::Percentage((100 - percent_y) / 2),
-        ])
-        .split(r);
-
-    Layout::default()
-        .direction(Direction::Horizontal)
-        .constraints([
-            Constraint::Percentage((100 - percent_x) / 2),
-            Constraint::Percentage(percent_x),
-            Constraint::Percentage((100 - percent_x) / 2),
-        ])
-        .split(popup_layout[1])[1]
-}
+#[allow(unused_imports)]
+pub use library::interface::tui::design::prelude::{centered_rect, wrap_text};
 
 /// Fixed-size layout helper to center a popup.
 pub fn centered_rect_fixed(width: u16, height: u16, r: Rect) -> Rect {
@@ -35,29 +17,6 @@ pub fn centered_rect_fixed(width: u16, height: u16, r: Rect) -> Rect {
         width: width.min(r.width),
         height: height.min(r.height),
     }
-}
-
-/// Text wrapping helper for simple paragraph blocks.
-pub fn wrap_text(text: &str, max_width: usize) -> Vec<String> {
-    let mut words = text.split_whitespace();
-    let mut lines = Vec::new();
-    let mut current_line = String::new();
-
-    while let Some(word) = words.next() {
-        if current_line.is_empty() {
-            current_line.push_str(word);
-        } else if current_line.len() + 1 + word.len() <= max_width {
-            current_line.push(' ');
-            current_line.push_str(word);
-        } else {
-            lines.push(current_line);
-            current_line = word.to_string();
-        }
-    }
-    if !current_line.is_empty() {
-        lines.push(current_line);
-    }
-    lines
 }
 
 /// Generates a payload-ready QR code matching WiFi credentials format:
