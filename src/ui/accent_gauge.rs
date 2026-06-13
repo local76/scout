@@ -3,7 +3,7 @@ use ratatui::{
     style::{Color, Modifier, Style},
     widgets::Widget,
 };
-use library::ui::colors::AccentColors;
+use crate::ui::colors::AccentColors;
 
 /// A custom progress gauge styled with the system DWM accent color.
 /// Supports a `focused` flag to make it first-class for tab/focus-based UIs.

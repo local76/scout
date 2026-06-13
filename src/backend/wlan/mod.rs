@@ -100,9 +100,13 @@ pub mod win32;
 
 #[cfg(not(windows))]
 pub mod stub;
+#[cfg(not(windows))]
+pub mod stub_connect;
 
 #[cfg(windows)]
 pub use win32::*;
 
 #[cfg(not(windows))]
 pub use stub::*;
+#[cfg(not(windows))]
+pub use stub_connect::*;

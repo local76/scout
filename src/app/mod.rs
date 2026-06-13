@@ -1,14 +1,15 @@
-﻿//! Application state structures and state transitions.
+//! Application state structures and state transitions.
 //!
 //! **Taxonomy Classification**: Business Logic (AppState).
 
 use std::time::{Duration, Instant};
 use ratatui::text::Line;
-use library::ui::textbox::TextBox;
-use library::apps::file_log::log_message;
+use crate::ui::textbox::TextBox;
+use crate::logger::log_message;
 use crate::win32::{self, WlanNetwork, GlyphMap};
 
 pub mod keys;
+pub mod keys_wifi;
 pub mod keys_overlays;
 pub mod mouse;
 
@@ -51,7 +52,7 @@ pub struct AppState {
 
     // Manage Offline Known Networks (Profiles) overlay fields
     pub show_profiles_overlay: bool,
-    pub profiles_list: Vec<(String, windows_sys::core::GUID)>,
+    pub profiles_list: Vec<(String, crate::windows_sys::core::GUID)>,
     pub profiles_selected_idx: usize,
     
     pub status_msg: String,
@@ -87,8 +88,8 @@ pub struct AppState {
 impl AppState {
     pub fn new() -> Self {
         let on_battery = win32::query_power_status().map(|p| !p.ac_online).unwrap_or(false);
-        let username = std::env::var("USERNAME").unwrap_or_else(|_| "user".to_string());
-        let hostname = std::env::var("COMPUTERNAME").unwrap_or_else(|_| "localhost".to_string());
+        let username = crate::backend::identity::username();
+        let hostname = crate::backend::identity::hostname();
         let os_version = win32::query_os_version();
 
         Self {

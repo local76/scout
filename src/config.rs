@@ -4,7 +4,7 @@
 
 use std::io;
 
-use library::toolkit::config::{AppConfig as GenericAppConfig, ConfigFields};
+use crate::backend::config::{AppConfig as GenericAppConfig, ConfigFields};
 
 pub const APP_NAME: &str = "app/scout";
 pub const CONFIG_FILE: &str = "config.yaml";

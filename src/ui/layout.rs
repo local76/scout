@@ -1,12 +1,12 @@
-﻿//! Layout and QR generation rendering helpers.
+//! Layout and QR generation rendering helpers.
 //!
 //! **Taxonomy Classification**: UI Rendering (UI Utilities).
 
 use ratatui::layout::Rect;
 
 #[allow(unused_imports)]
-pub use library::ui::layout::centered_rect;
-pub use library::ui::text::wrap_text;
+pub use crate::ui::layout_helpers::centered_rect;
+pub use crate::ui::text::wrap_text;
 
 /// Fixed-size layout helper to center a popup.
 pub fn centered_rect_fixed(width: u16, height: u16, r: Rect) -> Rect {

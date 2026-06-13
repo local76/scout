@@ -1,4 +1,8 @@
-﻿#![allow(deprecated)]
+#![allow(deprecated)]
+#![allow(dead_code)]
+#![allow(unused_imports)]
+#![allow(unused_variables)]
+#![allow(unexpected_cfgs)]
 //! scout: Terminal User Interface WiFi network manager for Windows.
 //!
 //! **Taxonomy Classification**: Application Coordinator.
@@ -6,18 +10,30 @@
 use std::time::{Duration, Instant};
 
 use crossterm::event::{self, Event, KeyEventKind};
-use library::apps::bootstrap::{init, shutdown, Config as BootstrapConfig};
-use library::apps::file_log::{log_message, set_event_log_enabled, set_log_app_name};
+use crate::bootstrap::{init, shutdown, Config as BootstrapConfig};
+use crate::logger::{log_message, set_event_log_enabled, set_log_app_name};
 
-mod config;
-mod backend;
-mod win32;
 mod app;
+mod backend;
+mod bootstrap;
+mod bootstrap_guards;
+mod chrome;
+mod clipboard;
+mod config;
+mod logger;
 mod ui;
+mod utils;
+mod win32;
+mod win32_relaunch;
+
+#[cfg(test)]
+mod tests_perf;
 
 // Re-exports for submodules
 #[cfg(not(windows))]
 pub use crate::backend::wlan::windows_sys;
+#[cfg(windows)]
+pub use windows_sys;
 
 // Embedded markdown documentation files
 pub const README_CONTENT: &str = include_str!("../README.md");
@@ -47,7 +63,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     #[cfg(windows)]
     {
-        library::apps::window::show_console_window();
+        crate::backend::window::show_console_window();
     }
 
     let mut app = app::AppState::new();
@@ -58,7 +74,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut last_tick = Instant::now();
 
     while !app.should_quit {
-        if library::apps::bootstrap::is_app_shutting_down() {
+        if crate::bootstrap::is_app_shutting_down() {
             break;
         }
         app.check_scan_results();

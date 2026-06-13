@@ -1,4 +1,4 @@
-﻿//! UI module initialization, themes, and primary drawing entry point.
+//! UI module initialization, themes, and primary drawing entry point.
 //!
 //! **Taxonomy Classification**: UI Rendering (UI Dispatcher).
 
@@ -12,12 +12,22 @@ use ratatui::{
 use crate::app::AppState;
 
 pub mod widgets;
+pub mod widgets_header_footer;
 pub mod overlays;
+pub mod overlays_password;
+pub mod overlays_share;
 pub mod layout;
 pub mod accent_gauge;
+pub mod colors;
+pub mod theme;
+pub mod layout_helpers;
+pub mod markdown;
+pub mod text;
+pub mod scrollbar;
+pub mod textbox;
 
-pub use library::ui::theme::{ThemeColors, get_theme};
-pub use library::ui::markdown::parse_markdown_to_lines;
+pub use crate::ui::theme::{ThemeColors, get_theme};
+pub use crate::ui::markdown::parse_markdown_to_lines;
 
 pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
     let size = f.area();
@@ -59,7 +69,7 @@ pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
         .split(size);
 
     // Render static panels
-    widgets::draw_header(f, app, theme, chunks[0]);
+    widgets_header_footer::draw_header(f, app, theme, chunks[0]);
     
     let body_chunks = Layout::default()
         .direction(Direction::Horizontal)
@@ -71,17 +81,17 @@ pub fn draw_ui(f: &mut Frame, app: &mut AppState, theme: &ThemeColors) {
 
     widgets::draw_network_list(f, app, theme, body_chunks[0]);
     widgets::draw_info_panel(f, app, theme, body_chunks[1]);
-    widgets::draw_footer(f, app, theme, chunks[2]);
+    widgets_header_footer::draw_footer(f, app, theme, chunks[2]);
 
     // Render overlay modals in order of precedence
     if app.show_password_overlay {
-        overlays::draw_password_overlay(f, app, theme);
+        overlays_password::draw_password_overlay(f, app, theme);
     }
     if app.show_share_overlay {
-        overlays::draw_share_overlay(f, app, theme);
+        overlays_share::draw_share_overlay(f, app, theme);
     }
     if app.show_hidden_overlay {
-        overlays::draw_hidden_overlay(f, app, theme);
+        overlays_share::draw_hidden_overlay(f, app, theme);
     }
     if app.show_profiles_overlay {
         overlays::draw_profiles_overlay(f, app, theme);

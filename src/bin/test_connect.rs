@@ -1,4 +1,7 @@
-﻿#![allow(unused)]
+#![allow(unused)]
+#[path = "../logger.rs"]
+mod logger;
+
 #[path = "../backend/mod.rs"]
 mod backend;
 
@@ -31,7 +34,7 @@ fn main() {
         Err(e) => {
             println!("Result: Err: {}", e);
             println!("Testing log_windows_event...");
-            library::apps::event_log::log_system_event("scoutTest", 1, 1002, &format!("Failed to connect to FakeSecureWiFi: {}", e));
+            backend::event_log::log_system_event("scoutTest", 1, 1002, &format!("Failed to connect to FakeSecureWiFi: {}", e));
             println!("log_windows_event completed successfully");
         }
     }

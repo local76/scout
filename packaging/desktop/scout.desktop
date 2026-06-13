@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Scout
+Comment=TUI WiFi Network Manager
+Exec=scout
+Icon=scout
+Terminal=true
+Categories=System;Network;
